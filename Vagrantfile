@@ -70,8 +70,14 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: "sleep 60"
+  config.vm.provision "shell", inline: <<-SHELL
+    export DEBIAN_FRONTEND=noninteractive
+
+    echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    
+    apt-get update
+    apt-get install -y postgresql-15 postgresql-client-15 libpq-dev
+  SHELL
 end
