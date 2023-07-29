@@ -47,9 +47,18 @@ sudo systemctl status postgresql@15-main.service
 ```
 
 
+## Admin
+
+```
+createuser  ${app_name} -P
+createdb -O ${app_name} ${app_name}_production -E UTF8 -e
+```
+
 
 ## Ref
 
 * <https://www.postgresql.org/>
 * [PostgreSQL Apt Repository](https://www.postgresql.org/download/linux/ubuntu/)
 * [Community.Postgresql &mdash; Ansible Documentation](https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html)
+* <https://www.pgcli.com/>
+* <https://eggerapps.at/postico2/>
